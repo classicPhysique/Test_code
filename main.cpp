@@ -1,4 +1,4 @@
-Define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -112,7 +112,7 @@ int main() {
                 printf("cannot open the file.\n");
             }
 
-            printf("\nUser adde. press enter key to go back menu.");
+            printf("\nUser added. press enter key to go back menu.");
             getchar();
         }
         else if (choice == 3) {
