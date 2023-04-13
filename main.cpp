@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+efine _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,7 +32,7 @@ int compare_average(const void* a, const void* b);
 int main() {
     FILE* file = fopen("students.txt", "r");
     if (!file) {
-        printf("ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+        printf("cannot open the file.\n");
         return 1;
     }
 
@@ -42,7 +42,7 @@ int main() {
     Student temp;
     
 
-    //ÀÐ¾î¿À±â
+    //ì½ì–´ì˜¤ê¸°
     while (fscanf(file, "%s %f %d %s %d", temp.name, &temp.average, &temp.student_id, temp.subject, &temp.score) == 5) {
         root_name = insert_node(root_name, temp, compare_name);
         root_average = insert_node(root_average, temp, compare_average);
@@ -51,157 +51,157 @@ int main() {
     fclose(file);
 
 
-    //»ç¿ëÀÚ ÀÎÅÍÆäÀÌ½º ±¸¼º
+    //ì‚¬ìš©ìž ì¸í„°íŽ˜ì´ìŠ¤ êµ¬ì„±
     while (1) {
         printf("\n\n");
         menu();
         int choice;
         scanf("%d", &choice);
-        getchar(); // ¿£ÅÍ Á¦°Å
+        getchar(); // ì—”í„° ì œê±°
         if (choice == 1) {
             while (1) {
                 sort_menu();
                 int sort_choice;
                 scanf("%d", &sort_choice);
-                getchar(); // ¿£ÅÍ Á¦°Å
+                getchar(); // ì—”í„° ì œê±°
                 if (sort_choice == 1) {
-                    printf("\nÀÌ¸§¼ø Á¤·Ä:\n");
+                    printf("\nsort by name:\n");
                     print_inorder(root_name);
                 }
                 else if (sort_choice == 2) {
-                    printf("\nÆò±Õ¼ø Á¤·Ä:\n");
+                    printf("\nsort by average:\n");
                     print_inorder(root_average);
                 }
                 else if (sort_choice == 3) {
-                    printf("\nÇÐ¹ø¼ø Á¤·Ä:\n");
+                    printf("\nsort by student ID:\n");
                     print_inorder(root_student_id);
                 }
                 else {
                     break;
                 }
-                printf("\n¿£ÅÍ¸¦ ´©¸£¸é ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù.");
+                printf("\nif press enter, go back to menu.");
                 getchar();
                 break;
             }
         }
         else if (choice == 2) {
             Student new_student;
-            printf("\n»ç¿ëÀÚ Ãß°¡:\n");
-            printf("ÀÌ¸§: ");
+            printf("\nadd user:\n");
+            printf("name: ");
             scanf("%s", new_student.name);
-            printf("Æò±Õ: ");
+            printf("average score: ");
             scanf("%f", &new_student.average);
-            printf("ÇÐ¹ø: ");
+            printf("student id: ");
             scanf("%d", &new_student.student_id);
-            printf("°ú¸ñ: ");
+            printf("subject: ");
             scanf("%s", new_student.subject);
-            printf("Á¡¼ö: ");
+            printf("score: ");
             scanf("%d", &new_student.score);
-            getchar(); // ¿£ÅÍ Á¦°Å
+            getchar(); // ì—”í„° ì œê±°
             root_name = insert_node(root_name, new_student, compare_name);
             root_average = insert_node(root_average, new_student, compare_average);
             root_student_id = insert_node(root_student_id, new_student, compare_student_id);
 
-            // »ç¿ëÀÚ Ãß°¡ ÈÄ txtÆÄÀÏ¿¡ ¾÷µ¥ÀÌÆ®
+            // ì‚¬ìš©ìž ì¶”ê°€ í›„ txtíŒŒì¼ì— ì—…ë°ì´íŠ¸
             FILE* file = fopen("students.txt", "a");
             if (file) {
                 fprintf(file, "\n%s %0.1f %d %s %d", new_student.name, new_student.average, new_student.student_id, new_student.subject, new_student.score);
                 fclose(file);
             }
             else {
-                printf("ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+                printf("cannot open the file.\n");
             }
 
-            printf("\n»ç¿ëÀÚ°¡ Ãß°¡µÇ¾ú½À´Ï´Ù. ¿£ÅÍ¸¦ ´©¸£¸é ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù.");
+            printf("\nUser adde. press enter key to go back menu.");
             getchar();
         }
         else if (choice == 3) {
-            // º¯¼ö ¼±¾ð
+            // ë³€ìˆ˜ ì„ ì–¸
             int student_id;
 
-            // »ç¿ëÀÚ¿¡°Ô »èÁ¦ÇÒ ÇÐ¹ø ÀÔ·Â ¿äÃ»
-            printf("\n»ç¿ëÀÚ »èÁ¦:\n");
-            printf("»èÁ¦ÇÒ ÇÐ¹øÀ» ÀÔ·ÂÇÏ¼¼¿ä: ");
+            // ì‚¬ìš©ìžì—ê²Œ ì‚­ì œí•  í•™ë²ˆ ìž…ë ¥ ìš”ì²­
+            printf("\nDelete User:\n");
+            printf("Enter student ID to be deleted: ");
             scanf("%d", &student_id);
-            getchar(); // ¿£ÅÍ Á¦°Å
+            getchar(); // ì—”í„° ì œê±°
 
-            // ÇÐ¹øÀ¸·Î ³ëµå »èÁ¦
+            // í•™ë²ˆìœ¼ë¡œ ë…¸ë“œ ì‚­ì œ
             root_name = delete_node(root_name, student_id);
             root_average = delete_node(root_average, student_id);
             root_student_id = delete_node(root_student_id, student_id);
 
-            // »ç¿ëÀÚ »èÁ¦ ÈÄ txt ÆÄÀÏ ¾÷µ¥ÀÌÆ®
+            // ì‚¬ìš©ìž ì‚­ì œ í›„ txt íŒŒì¼ ì—…ë°ì´íŠ¸
             FILE* file = fopen("students.txt", "r");
             FILE* temp_file = fopen("temp_students.txt", "w");
 
-            // ÆÄÀÏÀÌ Á¤»óÀûÀ¸·Î ¿­·È´ÂÁö È®ÀÎ
+            // íŒŒì¼ì´ ì •ìƒì ìœ¼ë¡œ ì—´ë ¸ëŠ”ì§€ í™•ì¸
             if (file && temp_file) {
                 Student temp_student;
 
-                // ÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÀÐ¾î¿È
+                // íŒŒì¼ì—ì„œ ë°ì´í„°ë¥¼ ì½ì–´ì˜´
                 while (fscanf(file, "%s %f %d %s %d", temp_student.name, &temp_student.average, &temp_student.student_id, temp_student.subject, &temp_student.score) == 5) {
-                    // »èÁ¦µÈ ÇÐ¹øÀÌ ¾Æ´Ñ °æ¿ì¿¡¸¸ temp_students.txt ÆÄÀÏ¿¡ ±â·Ï
+                    // ì‚­ì œëœ í•™ë²ˆì´ ì•„ë‹Œ ê²½ìš°ì—ë§Œ temp_students.txt íŒŒì¼ì— ê¸°ë¡
                     if (temp_student.student_id != student_id) {
                         fprintf(temp_file, "%s %f %d %s %d\n", temp_student.name, temp_student.average, temp_student.student_id, temp_student.subject, temp_student.score);
                     }
                 }
 
-                // ÆÄÀÏ ´Ý±â
+                // íŒŒì¼ ë‹«ê¸°
                 fclose(file);
                 fclose(temp_file);
 
-                // ¿ø·¡ ÆÄÀÏ »èÁ¦ ÈÄ temp_students.txt ÆÄÀÏÀ» students.txt·Î º¯°æ
-                // ÆÄÀÏÀ» ¿­°íÀÖ´Â»óÅÂ·Î ±×´ë·Î ¾µ °æ¿ì,  ÆÄÀÏ µð½ºÅ©¸³ÅÍ°¡ Áßº¹µÇ¾î ¼ö¸¸°ÇÀÇ °°Àº µ¥ÀÌÅÍ°¡ ¹Ýº¹ÇØ¼­ ¾²ÀÓ
-                // ±âÁ¸ ÆÄÀÏÀ» º¹»çÇÏ¿©, ´Ù¸¥ ÆÄÀÏ µð½ºÅ©¸³ÅÍ »ç¿ë. Ãß°¡µÈ »ç¿ëÀÚ¸¦ ÀÔ·Â. 
-                // ±âÁ¸ ÆÄÀÏ »èÁ¦
+                // ì›ëž˜ íŒŒì¼ ì‚­ì œ í›„ temp_students.txt íŒŒì¼ì„ students.txtë¡œ ë³€ê²½
+                // íŒŒì¼ì„ ì—´ê³ ìžˆëŠ”ìƒíƒœë¡œ ê·¸ëŒ€ë¡œ ì“¸ ê²½ìš°,  íŒŒì¼ ë””ìŠ¤í¬ë¦½í„°ê°€ ì¤‘ë³µë˜ì–´ ìˆ˜ë§Œê±´ì˜ ê°™ì€ ë°ì´í„°ê°€ ë°˜ë³µí•´ì„œ ì“°ìž„
+                // ê¸°ì¡´ íŒŒì¼ì„ ë³µì‚¬í•˜ì—¬, ë‹¤ë¥¸ íŒŒì¼ ë””ìŠ¤í¬ë¦½í„° ì‚¬ìš©. ì¶”ê°€ëœ ì‚¬ìš©ìžë¥¼ ìž…ë ¥. 
+                // ê¸°ì¡´ íŒŒì¼ ì‚­ì œ
                 remove("students.txt");
                 rename("temp_students.txt", "students.txt");
             }
             else {
-                printf("ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+                printf("cannot open the file.\n");
             }
 
-            // Æ®¸® ¸Þ¸ð¸® ÇØÁ¦
+            // íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
             free_tree(root_name);
             free_tree(root_average);
             free_tree(root_student_id);
 
-            // Æ®¸® ÃÊ±âÈ­
+            // íŠ¸ë¦¬ ì´ˆê¸°í™”
             root_name = NULL;
             root_average = NULL;
             root_student_id = NULL;
 
-            // ÆÄÀÏ ´Ù½Ã ¿­±â
+            // íŒŒì¼ ë‹¤ì‹œ ì—´ê¸°
             file = fopen("students.txt", "r");
 
-            // ÆÄÀÏÀÌ Á¤»óÀûÀ¸·Î ¿­·È´ÂÁö È®ÀÎ
+            // íŒŒì¼ì´ ì •ìƒì ìœ¼ë¡œ ì—´ë ¸ëŠ”ì§€ í™•ì¸
             if (file) {
                 Student temp_student;
 
-                // ÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÀÐ¾î¿Í Æ®¸®¿¡ »ðÀÔ
+                // íŒŒì¼ì—ì„œ ë°ì´í„°ë¥¼ ì½ì–´ì™€ íŠ¸ë¦¬ì— ì‚½ìž…
                 while (fscanf(file, "%s %f %d %s %d", temp_student.name, &temp_student.average, &temp_student.student_id, temp_student.subject, &temp_student.score) == 5) {
                     root_name = insert_node(root_name, temp_student, compare_name);
                     root_average = insert_node(root_average, temp_student, compare_average);
                     root_student_id = insert_node(root_student_id, temp_student, compare_student_id);
                 }
 
-                // ÆÄÀÏ ´Ý±â
+                // íŒŒì¼ ë‹«ê¸°
                 fclose(file);
             }
             else {
-                printf("ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+                printf("cannot open the file.\n");
             }
 
-            // »ç¿ëÀÚ »èÁ¦ ¿Ï·á ¸Þ½ÃÁö Ãâ·Â
-            printf("\n»ç¿ëÀÚ°¡ »èÁ¦µÇ¾ú½À´Ï´Ù. ¿£ÅÍ¸¦ ´©¸£¸é ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù.");
+            // ì‚¬ìš©ìž ì‚­ì œ ì™„ë£Œ ë©”ì‹œì§€ ì¶œë ¥
+            printf("\nUser adde. press enter key to go back menu.");
             getchar();
         }
         else if (choice == 4) {
-            printf("\nÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.\n");
+            printf("\nClose Program.\n");
             break;
         }
         else {
-            printf("\nÀß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù.\n");
+            printf("\nInvalid input. Return to the menu.\n");
         }
     }
 
@@ -215,24 +215,24 @@ int main() {
 
 void menu() {
     printf("MENU\n");
-    printf("1. »ç¿ëÀÚ Á¤·Ä\n");
-    printf("2. »ç¿ëÀÚ Ãß°¡\n");
-    printf("3. »ç¿ëÀÚ »èÁ¦\n");
-    printf("4. Á¾·á\n");
-    printf("¼±ÅÃÇÒ ¸Þ´º ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("1. User sort\n");
+    printf("2. Add User\n");
+    printf("3. Delete User\n");
+    printf("4. Close\n");
+    printf("Enter the menu number to select: ");
 }
 
 void sort_menu() {
-    printf("\n»ç¿ëÀÚ Á¤·Ä\n");
-    printf("1. ÀÌ¸§¼ø Á¤·Ä\n");
-    printf("2. Æò±Õ¼ø Á¤·Ä\n");
-    printf("3. ÇÐ¹ø¼ø Á¤·Ä\n");
-    printf("¼±ÅÃÇÒ Á¤·Ä ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+    printf("\nUser sort\n");
+    printf("1. Sort by name\n");
+    printf("2. Sort by average \n");
+    printf("3. Sort by student ID\n");
+    printf("Please enter a sort number to select: ");
 }
 
-// ÀÌÁø Å½»ö Æ®¸®¿¡ ³ëµå¸¦ »ðÀÔÇÏ´Â ÇÔ¼ö
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì— ë…¸ë“œë¥¼ ì‚½ìž…í•˜ëŠ” í•¨ìˆ˜
 TreeNode* insert_node(TreeNode* node, Student data, int (*comparator)(const void*, const void*)) {
-    // ±âÀú »ç·Ê: ³ëµå°¡ ºñ¾îÀÖ´Â °æ¿ì »õ ³ëµå¸¦ »ý¼ºÇÏ°í µ¥ÀÌÅÍ¸¦ »ðÀÔ
+    // ê¸°ì € ì‚¬ë¡€: ë…¸ë“œê°€ ë¹„ì–´ìžˆëŠ” ê²½ìš° ìƒˆ ë…¸ë“œë¥¼ ìƒì„±í•˜ê³  ë°ì´í„°ë¥¼ ì‚½ìž…
     if (node == NULL) {
         TreeNode* new_node = (TreeNode*)malloc(sizeof(TreeNode));
         new_node->data = data;
@@ -240,7 +240,7 @@ TreeNode* insert_node(TreeNode* node, Student data, int (*comparator)(const void
         return new_node;
     }
 
-    // µ¥ÀÌÅÍ¸¦ ºñ±³ÇÏ¿© ¿ÞÂÊ ¶Ç´Â ¿À¸¥ÂÊ ¼­ºêÆ®¸®¿¡ »ðÀÔ
+    // ë°ì´í„°ë¥¼ ë¹„êµí•˜ì—¬ ì™¼ìª½ ë˜ëŠ” ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ì— ì‚½ìž…
     if (comparator(&data, &node->data) < 0) {
         node->left = insert_node(node->left, data, comparator);
     }
@@ -251,13 +251,13 @@ TreeNode* insert_node(TreeNode* node, Student data, int (*comparator)(const void
     return node;
 }
 
-// ÀÌÁø Å½»ö Æ®¸®¿¡¼­ ³ëµå¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì—ì„œ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜
 TreeNode* delete_node(TreeNode* root, int student_id) {
     TreeNode* parent, * current, * temp;
     parent = NULL;
     current = root;
 
-    // ÇÐ¹øÀ» Ã£±â À§ÇØ Æ®¸®¸¦ Å½»ö
+    // í•™ë²ˆì„ ì°¾ê¸° ìœ„í•´ íŠ¸ë¦¬ë¥¼ íƒìƒ‰
     while (current != NULL) {
         if (current->data.student_id == student_id) {
             break;
@@ -271,19 +271,19 @@ TreeNode* delete_node(TreeNode* root, int student_id) {
         }
     }
 
-    // ÇÐ¹øÀÌ ¾ø´Â °æ¿ì, ·çÆ®¸¦ ¹ÝÈ¯
+    // í•™ë²ˆì´ ì—†ëŠ” ê²½ìš°, ë£¨íŠ¸ë¥¼ ë°˜í™˜
     if (current == NULL) {
         return root;
     }
 
-    // »èÁ¦ÇÒ ³ëµåÀÇ ÀÚ½Ä ³ëµå°¡ ¾ø°Å³ª ÇÏ³ª¸¸ ÀÖ´Â °æ¿ì Ã³¸®
+    // ì‚­ì œí•  ë…¸ë“œì˜ ìžì‹ ë…¸ë“œê°€ ì—†ê±°ë‚˜ í•˜ë‚˜ë§Œ ìžˆëŠ” ê²½ìš° ì²˜ë¦¬
     if (current->left == NULL) {
         temp = current->right;
     }
     else if (current->right == NULL) {
         temp = current->left;
     }
-    // µÎ ÀÚ½Ä ³ëµå°¡ ÀÖ´Â °æ¿ì Ã³¸®
+    // ë‘ ìžì‹ ë…¸ë“œê°€ ìžˆëŠ” ê²½ìš° ì²˜ë¦¬
     else {
         TreeNode* temp_parent = current;
         temp = current->right;
@@ -298,11 +298,11 @@ TreeNode* delete_node(TreeNode* root, int student_id) {
         temp->left = current->left;
     }
 
-    // »èÁ¦ÇÒ ³ëµå°¡ ·çÆ®ÀÎ °æ¿ì Ã³¸®
+    // ì‚­ì œí•  ë…¸ë“œê°€ ë£¨íŠ¸ì¸ ê²½ìš° ì²˜ë¦¬
     if (parent == NULL) {
         root = temp;
     }
-    // »èÁ¦ÇÒ ³ëµå°¡ ·çÆ®°¡ ¾Æ´Ñ °æ¿ì Ã³¸®
+    // ì‚­ì œí•  ë…¸ë“œê°€ ë£¨íŠ¸ê°€ ì•„ë‹Œ ê²½ìš° ì²˜ë¦¬
     else if (parent->left == current) {
         parent->left = temp;
     }
@@ -310,13 +310,13 @@ TreeNode* delete_node(TreeNode* root, int student_id) {
         parent->right = temp;
     }
 
-    // »èÁ¦ÇÒ ³ëµå ¸Þ¸ð¸® ÇØÁ¦
+    // ì‚­ì œí•  ë…¸ë“œ ë©”ëª¨ë¦¬ í•´ì œ
     free(current);
     current = NULL;
     return root;
 }
 
-// ÃÖ¼Ò ³ëµå Ã£´Â ÇÔ¼ö
+// ìµœì†Œ ë…¸ë“œ ì°¾ëŠ” í•¨ìˆ˜
 TreeNode* find_min(TreeNode* node) {
     while (node->left) {
         node = node->left;
@@ -324,7 +324,7 @@ TreeNode* find_min(TreeNode* node) {
     return node;
 }
 
-//Æ®¸®¸¦ ¼øÈ¸ÇÏ¸ç Ãâ·ÂÇÏ´Â ÇÔ¼ö
+//íŠ¸ë¦¬ë¥¼ ìˆœíšŒí•˜ë©° ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 void print_inorder(TreeNode* node) {
     if (node) {
         print_inorder(node->left);
@@ -334,7 +334,7 @@ void print_inorder(TreeNode* node) {
 }
 
 
-//Æ®¸®ÀÇ µ¿Àû ÇÒ´çÀ» ¸Þ¸ð¸®¿¡¼­ ÇØÁ¦ÇÏ´Â ÇÔ¼ö
+//íŠ¸ë¦¬ì˜ ë™ì  í• ë‹¹ì„ ë©”ëª¨ë¦¬ì—ì„œ í•´ì œí•˜ëŠ” í•¨ìˆ˜
 void free_tree(TreeNode* node) {
     if (node) {
         free_tree(node->left);
@@ -343,21 +343,21 @@ void free_tree(TreeNode* node) {
     }
 }
 
-// ÇÐ¹øÀ» ±âÁØÀ¸·Î µÎ ÇÐ»ýÀ» ºñ±³ÇÏ´Â ÇÔ¼ö
+// í•™ë²ˆì„ ê¸°ì¤€ìœ¼ë¡œ ë‘ í•™ìƒì„ ë¹„êµí•˜ëŠ” í•¨ìˆ˜
 int compare_student_id(const void* a, const void* b) {
     Student* student_a = (Student*)a;
     Student* student_b = (Student*)b;
     return student_a->student_id - student_b->student_id;
 }
 
-// ÀÌ¸§À» ±âÁØÀ¸·Î µÎ ÇÐ»ýÀ» ºñ±³ÇÏ´Â ÇÔ¼ö
+// ì´ë¦„ì„ ê¸°ì¤€ìœ¼ë¡œ ë‘ í•™ìƒì„ ë¹„êµí•˜ëŠ” í•¨ìˆ˜
 int compare_name(const void* a, const void* b) {
     Student* student_a = (Student*)a;
     Student* student_b = (Student*)b;
     return strcmp(student_a->name, student_b->name);
 }
 
-// Æò±Õ Á¡¼ö¸¦ ±âÁØÀ¸·Î µÎ ÇÐ»ýÀ» ºñ±³ÇÏ´Â ÇÔ¼ö
+// í‰ê·  ì ìˆ˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‘ í•™ìƒì„ ë¹„êµí•˜ëŠ” í•¨ìˆ˜
 int compare_average(const void* a, const void* b) {
     Student* student_a = (Student*)a;
     Student* student_b = (Student*)b;
@@ -365,7 +365,7 @@ int compare_average(const void* a, const void* b) {
 }
 
 
-//ÀÌ ÇÔ¼öµéÀº ÀÌÁø Å½»ö Æ®¸®ÀÇ ³ëµå¸¦ »ðÀÔÇÏ°Å³ª Å½»öÇÒ ¶§ »ç¿ëµÇ´Â ºñ±³ ÇÔ¼öÀÔ´Ï´Ù. 
-//ÀÌÁø Å½»ö Æ®¸®´Â µ¥ÀÌÅÍ¸¦ Á¤·ÄµÈ »óÅÂ·Î ÀúÀåÇÏ¹Ç·Î, ³ëµå¸¦ »ðÀÔÇÏ°Å³ª Å½»öÇÒ ¶§ ºñ±³ ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© µ¥ÀÌÅÍ¸¦ Á¤·ÄµÈ ¼ø¼­´ë·Î Á¤·ÄÇÒ ¼ö ÀÖ½À´Ï´Ù. 
-//ÀÌ °æ¿ì, compare_student_id, compare_name, compare_average ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ÇÐ¹ø, ÀÌ¸§, Æò±Õ Á¡¼ö¸¦ ±âÁØÀ¸·Î Á¤·ÄµÈ ÀÌÁø Å½»ö Æ®¸®¸¦ ±¸¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù. 
-//ÀÌ·¸°Ô ±¸¼ºµÈ ÀÌÁø Å½»ö Æ®¸®´Â ºü¸¥ °Ë»ö ¹× Á¤·ÄµÈ °á°ú¸¦ Á¦°øÇÒ ¼ö ÀÖ½À´Ï´Ù.
+//ì´ í•¨ìˆ˜ë“¤ì€ ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì˜ ë…¸ë“œë¥¼ ì‚½ìž…í•˜ê±°ë‚˜ íƒìƒ‰í•  ë•Œ ì‚¬ìš©ë˜ëŠ” ë¹„êµ í•¨ìˆ˜ìž…ë‹ˆë‹¤. 
+//ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ëŠ” ë°ì´í„°ë¥¼ ì •ë ¬ëœ ìƒíƒœë¡œ ì €ìž¥í•˜ë¯€ë¡œ, ë…¸ë“œë¥¼ ì‚½ìž…í•˜ê±°ë‚˜ íƒìƒ‰í•  ë•Œ ë¹„êµ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ë°ì´í„°ë¥¼ ì •ë ¬ëœ ìˆœì„œëŒ€ë¡œ ì •ë ¬í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. 
+//ì´ ê²½ìš°, compare_student_id, compare_name, compare_average í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ í•™ë²ˆ, ì´ë¦„, í‰ê·  ì ìˆ˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬ëœ ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ë¥¼ êµ¬ì„±í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. 
+//ì´ë ‡ê²Œ êµ¬ì„±ëœ ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ëŠ” ë¹ ë¥¸ ê²€ìƒ‰ ë° ì •ë ¬ëœ ê²°ê³¼ë¥¼ ì œê³µí•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
