@@ -22,9 +22,13 @@ sudo yum install cmake
 
 # build 방법
 ```
+git clone git@github.com:classicPhysique/Test_code.git
+
+cd Test_code
+
 cmake CMakeLists.txt
 
-cMakeCache.txt & CMakeFiles & Makefile 이 생성된 것을 확인 후
+(cMakeCache.txt & CMakeFiles & Makefile 이 생성된 것을 확인 후)
 
 make
 
