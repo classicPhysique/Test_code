@@ -20,7 +20,7 @@ sudo yum install cmake
 
 
 
-# build 방법
+# build & 실행 방법
 ```
 git clone git@github.com:classicPhysique/Test_code.git
 
@@ -33,6 +33,9 @@ cmake CMakeLists.txt
 make
 
 make.exe 파일이 생성 되었습니다.
+
+./make.exe (실행 권한이 없을 시 sudo chmod +x <파일명>로 권한부여)
+
 ```
 
 # 개요
